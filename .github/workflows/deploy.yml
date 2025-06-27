@@ -1,21 +1,32 @@
-name: Build and Deploy
+name: Build and Deploy # 워크플로우 이름 (원하는 대로 변경 가능)
+
 on:
   push:
-    branches: [ main ]
+    branches: [ main ] # 'main' 브랜치에 푸시될 때 워크플로우 실행
+
+permissions:
+  contents: write # 저장소 콘텐츠에 대한 쓰기 권한 부여
+  pages: write    # GitHub Pages 배포를 위한 쓰기 권한 부여
+  id-token: write # OIDC 인증을 위한 토큰 쓰기 권한 부여 (권장)
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Node.js
+    - uses: actions/checkout@v2 # 저장소 코드 체크아웃 (v2 사용)
+
+    - name: Setup Node.js # Node.js 환경 설정
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
-    - run: npm install
-    - run: npm run build
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+        node-version: '18' # Node.js 버전 18로 설정
+
+    - run: npm install # 프로젝트 의존성 설치 (package.json 기반)
+
+    - run: npm run build # package.json에 정의된 'build' 스크립트 실행 (npx expo export --platform web)
+
+    - name: Deploy # GitHub Pages 배포 단계
+      uses: peaceiris/actions-gh-pages@v3 # peaceiris/actions-gh-pages 액션 사용 (v3 사용)
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub에서 제공하는 기본 토큰 사용
+        publish_dir: ./web-build # ⭐ 이 부분을 ./dist에서 ./web-build로 변경하는 것을 권장합니다.
