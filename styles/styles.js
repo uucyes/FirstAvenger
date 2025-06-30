@@ -1,6 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,8 @@ export const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#fff',
-    paddingTop: 80,
+    // 플랫폼별 다른 paddingTop 적용
+    paddingTop: Platform.OS === 'web' ? 60 : Constants.statusBarHeight + 40,
     paddingHorizontal: 20,
     paddingBottom: 15,
     shadowColor: '#000',
@@ -22,7 +24,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: Platform.OS === 'web' ? 26 : 28,
     fontWeight: 'bold',
     color: '#2c3e50',
     textAlign: 'center',
@@ -35,13 +37,15 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 15,
     marginBottom: 15,
-    height: 45,
+    height: Platform.OS === 'web' ? 50 : 45,
   },
   searchInput: {
     flex: 1,
     fontSize: 16,
     color: '#34495e',
     marginLeft: 10,
+    // 웹에서 아웃라인 제거
+    ...(Platform.OS === 'web' && { outline: 'none' }),
   },
   quickAccessContainer: {
     flexDirection: 'row',
@@ -69,8 +73,8 @@ export const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    marginHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: Platform.OS === 'web' ? 20 : 20,
+    marginTop: Platform.OS === 'web' ? 15 : 20,
     borderRadius: 15,
     padding: 5,
     shadowColor: '#000',
@@ -84,7 +88,7 @@ export const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: Platform.OS === 'web' ? 15 : 12,
     alignItems: 'center',
     borderRadius: 10,
   },
@@ -95,7 +99,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   tabText: {
-    fontSize: 16,
+    fontSize: Platform.OS === 'web' ? 15 : 16,
     fontWeight: '600',
   },
   activeTabText: {
@@ -107,15 +111,15 @@ export const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: Platform.OS === 'web' ? 15 : 20,
   },
   cardContainer: {
-    marginBottom: 15,
+    marginBottom: Platform.OS === 'web' ? 12 : 15,
   },
   card: {
     backgroundColor: '#fff',
     borderRadius: 15,
-    padding: 20,
+    padding: Platform.OS === 'web' ? 18 : 20,
     flexDirection: 'row',
     alignItems: 'center',
     shadowColor: '#000',
@@ -133,9 +137,9 @@ export const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   cardIconContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: Platform.OS === 'web' ? 55 : 60,
+    height: Platform.OS === 'web' ? 55 : 60,
+    borderRadius: Platform.OS === 'web' ? 27.5 : 30,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
@@ -150,15 +154,15 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: Platform.OS === 'web' ? 17 : 18,
     fontWeight: 'bold',
     color: '#2c3e50',
     marginBottom: 5,
   },
   cardDescription: {
-    fontSize: 14,
+    fontSize: Platform.OS === 'web' ? 13 : 14,
     color: '#7f8c8d',
-    lineHeight: 20,
+    lineHeight: Platform.OS === 'web' ? 18 : 20,
   },
   // 각 카드별 아이콘 배경색
   disasterIcon: {
@@ -173,17 +177,23 @@ export const styles = StyleSheet.create({
   ethicsIcon: {
     backgroundColor: '#9b59b620',
   },
+  emotionalIcon: {
+    backgroundColor: '#f39c1220',
+  },
+  humanrightsIcon: {
+    backgroundColor: '#3498db20',
+  },
   footerContainer: {
-  alignItems: 'center',
-  justifyContent: 'center',
-  paddingVertical: 10,
-  backgroundColor: '#fff', // 필요에 따라 배경색 추가
-},
-companyLogo: {
-  width: 180,
-  height: 90,
-  alignSelf: 'center',
-  marginTop: 1,
-  marginBottom: 30,
-},
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: Platform.OS === 'web' ? 8 : 10,
+    backgroundColor: '#fff',
+  },
+  companyLogo: {
+    width: Platform.OS === 'web' ? 160 : 180,
+    height: Platform.OS === 'web' ? 80 : 90,
+    alignSelf: 'center',
+    marginTop: 1,
+    marginBottom: Platform.OS === 'web' ? 20 : 30,
+  },
 });
