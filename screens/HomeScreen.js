@@ -200,6 +200,7 @@ const HomeScreen = ({ navigation }) => {  // navigation prop 추가
           source={require('../assets/logo.jpg')}
           style={styles.companyLogo}
           resizeMode="contain"
+          onError={(error) => console.log('Image load error:', error)}
         />
       </View>
     </View>
