@@ -126,6 +126,11 @@ const HomeScreen = ({ navigation }) => {  // navigation prop 추가
     </TouchableOpacity>
   );
 
+  // ✅ 웹과 앱에서 로고 이미지를 다르게 로드
+  const logoSource = Platform.OS === 'web'
+    ? { uri: '/FirstAvenger/assets/logo.jpg' }  // GitHub Pages 경로 기준
+    : require('../assets/logo.jpg');            // 로컬 앱에서는 require 사용
+
   return (
     <View style={styles.container}>
       {/* 상단 헤더 */}
@@ -197,7 +202,7 @@ const HomeScreen = ({ navigation }) => {  // navigation prop 추가
       {/* 하단 로고 영역 */}
       <View style={styles.footerContainer}>
         <Image 
-          source={require('./assets/logo.jpg')}
+          source={logoSource}
           style={styles.companyLogo}
           resizeMode="contain"
           onError={(error) => console.log('Image load error:', error)}
