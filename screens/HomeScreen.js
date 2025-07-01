@@ -197,7 +197,7 @@ const HomeScreen = ({ navigation }) => {  // navigation prop 추가
       {/* 하단 로고 영역 */}
       <View style={styles.footerContainer}>
         <Image 
-          source={require('../assets/logo.jpg')}
+          source={require('./assets/logo.jpg')}
           style={styles.companyLogo}
           resizeMode="contain"
           onError={(error) => console.log('Image load error:', error)}
