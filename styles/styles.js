@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   header: {
     backgroundColor: '#fff',
     // 플랫폼별 다른 paddingTop 적용
-    paddingTop: Platform.OS === 'web' ? 60 : Constants.statusBarHeight + 40,
+    paddingTop: Platform.OS === 'web' ? 40 : Constants.statusBarHeight + 40,
     paddingHorizontal: 20,
     paddingBottom: 15,
     shadowColor: '#000',
@@ -190,10 +190,10 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   companyLogo: {
-    width: Platform.OS === 'web' ? 160 : 180,
-    height: Platform.OS === 'web' ? 80 : 90,
+    width: Platform.OS === 'web' ? 180 : 180,
+    height: Platform.OS === 'web' ? 70 : 90,
     alignSelf: 'center',
     marginTop: 1,
-    marginBottom: Platform.OS === 'web' ? 20 : 30,
+    marginBottom: Platform.OS === 'web' ? 10 : 30,
   },
 });
